@@ -25,27 +25,15 @@ Webots-Autonomous-Drone-Search-System
 ├── LICENSE
 ├── controllers/
 │   └── mavic2pro/
-│       ├── controller.py          # Autonomous search + mapping + logging
-│       └── __init__.py
+│       ├── mavic2pro.py          # Autonomous search + mapping + logging
 ├── worlds/
-│   └── arena.wbt                  # Webots simulation environment
+│   └── sample-map-2.wbt                  # Webots simulation environment
 ├── matlab/
-│   ├── reconstruction.m           # 3D point cloud reconstruction
-│   └── depth_reader.m             # Convert Webots depth data to MATLAB
+│   ├── pointcloud_reconstruction.m           # 3D point cloud reconstruction
 ├── data/
 │   ├── scan_log.csv               # Raw depth scan exported from Webots
 │   └── targets.csv                # Detected object world-coordinates
-├── docs/
-│   ├── algorithm_overview.md      # Control, detection, and search logic
-│   └── matlab_pipeline.md         # Import → reconstruct → visualize
-├── models/
-│   └── future_yolo_training/      # Placeholder for object detection ML
-│       ├── dataset/               # Custom dataset collection
-│       ├── annotations/           # future-label files / bounding boxes
-│       ├── export/                # ONNX / TensorRT / TFLite output
-│       └── train_config.md        # YOLO / SSD / DETR training notes
-└── utils/
-    └── convert_depth_to_pointcloud.py  # (optional) Python point cloud tool
+└── 
 ```
 ---
 
