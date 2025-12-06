@@ -22,7 +22,7 @@ This system performs real-time object detection, autonomous navigation, coordina
 ```bash
 Webots-Autonomous-Drone-Search-System
 ├── README.md
-├── LICENSE
+├── LICENSE.txt
 ├── controllers/
 │   └── mavic2pro/
 │       ├── mavic2pro.py          # Autonomous search + mapping + logging
