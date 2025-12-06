@@ -19,28 +19,6 @@ This system performs real-time object detection, autonomous navigation, coordina
 
 ## 📂 Repository Structure
 
-/controllers
-/mavic2pro
-controller.py # main autonomous flight logic
-
-/worlds
-arena.wbt # Webots simulation environment
-
-/matlab
-reconstruction.m # builds 3D scatter / point cloud
-depth_reader.m # imports scan_log.csv
-
-/data
-scan_log.csv # depth log for MATLAB
-targets.csv # detected object coordinates
-
-/docs
-algorithm_overview.md
-matlab_pipeline.md
-
-README.md
-LICENSE
-
 Webots-Autonomous-Drone-Search-System
 │
 ├── README.md
@@ -48,23 +26,23 @@ Webots-Autonomous-Drone-Search-System
 │
 ├── controllers/
 │   └── mavic2pro/
-│       ├── controller.py             # Main autonomous flight control + detection + logging
+│       ├── controller.py            
 │       └── __init__.py
 │
 ├── worlds/
-│   └── arena.wbt                     # Webots simulation world (drone + arena + objects)
+│   └── arena.wbt                    
 │
 ├── matlab/
-│   ├── reconstruction.m              # Point cloud / 3D scatter reconstruction
-│   └── depth_reader.m                # Reads scan_log.csv and builds map arrays
+│   ├── reconstruction.m              
+│   └── depth_reader.m                
 │
 ├── data/
-│   ├── scan_log.csv                  # RangeFinder full field-of-view log
-│   └── targets.csv                   # Exported detected object coordinates
+│   ├── scan_log.csv                  
+│   └── targets.csv                   
 │
 └── docs/
-    ├── algorithm_overview.md         # Detection + coordinate projection description
-    └── matlab_pipeline.md            # MATLAB processing documentation
+    ├── algorithm_overview.md         
+    └── matlab_pipeline.md           
 
 ---
 
