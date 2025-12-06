@@ -41,6 +41,30 @@ matlab_pipeline.md
 README.md
 LICENSE
 
+Webots-Autonomous-Drone-Search-System
+│
+├── README.md
+├── LICENSE
+│
+├── controllers/
+│   └── mavic2pro/
+│       ├── controller.py             # Main autonomous flight control + detection + logging
+│       └── __init__.py
+│
+├── worlds/
+│   └── arena.wbt                     # Webots simulation world (drone + arena + objects)
+│
+├── matlab/
+│   ├── reconstruction.m              # Point cloud / 3D scatter reconstruction
+│   └── depth_reader.m                # Reads scan_log.csv and builds map arrays
+│
+├── data/
+│   ├── scan_log.csv                  # RangeFinder full field-of-view log
+│   └── targets.csv                   # Exported detected object coordinates
+│
+└── docs/
+    ├── algorithm_overview.md         # Detection + coordinate projection description
+    └── matlab_pipeline.md            # MATLAB processing documentation
 
 ---
 
