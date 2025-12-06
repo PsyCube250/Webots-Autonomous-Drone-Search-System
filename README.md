@@ -19,7 +19,7 @@ This system performs real-time object detection, autonomous navigation, coordina
 
 ## 📂 Repository Structure
 
-md
+```bash
 Webots-Autonomous-Drone-Search-System
 ├── README.md
 ├── LICENSE
@@ -46,7 +46,7 @@ Webots-Autonomous-Drone-Search-System
 │       └── train_config.md        # YOLO / SSD / DETR training notes
 └── utils/
     └── convert_depth_to_pointcloud.py  # (optional) Python point cloud tool
-
+```
 ---
 
 ## 📄 Output — `targets.csv`
