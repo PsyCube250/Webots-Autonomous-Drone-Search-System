@@ -87,7 +87,10 @@ Run controller
 ```
 
 ## MATLAB (optional)
+
+```matlab
 run matlab/reconstruction.m
+```
 
 🔧 Optional Future Expansions
 
