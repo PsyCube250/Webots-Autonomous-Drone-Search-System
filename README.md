@@ -20,29 +20,31 @@ This system performs real-time object detection, autonomous navigation, coordina
 ## 📂 Repository Structure
 
 Webots-Autonomous-Drone-Search-System
-│
 ├── README.md
 ├── LICENSE
-│
 ├── controllers/
 │   └── mavic2pro/
-│       ├── controller.py            
+│       ├── controller.py          # Autonomous search + mapping + logging
 │       └── __init__.py
-│
 ├── worlds/
-│   └── arena.wbt                    
-│
+│   └── arena.wbt                  # Webots simulation environment
 ├── matlab/
-│   ├── reconstruction.m              
-│   └── depth_reader.m                
-│
+│   ├── reconstruction.m           # 3D point cloud reconstruction
+│   └── depth_reader.m             # Convert Webots depth data to MATLAB
 ├── data/
-│   ├── scan_log.csv                  
-│   └── targets.csv                   
-│
-└── docs/
-    ├── algorithm_overview.md         
-    └── matlab_pipeline.md           
+│   ├── scan_log.csv               # Raw depth scan exported from Webots
+│   └── targets.csv                # Detected object world-coordinates
+├── docs/
+│   ├── algorithm_overview.md      # Control, detection, and search logic
+│   └── matlab_pipeline.md         # Import → reconstruct → visualize
+├── models/
+│   └── future_yolo_training/      # Placeholder for object detection ML
+│       ├── dataset/               # Custom dataset collection
+│       ├── annotations/           # future-label files / bounding boxes
+│       ├── export/                # ONNX / TensorRT / TFLite output
+│       └── train_config.md        # YOLO / SSD / DETR training notes
+└── utils/
+    └── convert_depth_to_pointcloud.py  # (optional) Python point cloud tool
 
 ---
 
