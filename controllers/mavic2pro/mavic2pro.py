@@ -1,12 +1,3 @@
-"""
-DJI Mavic 2 Pro controller
-- WASD + QE 手动控制
-- ↑ / ↓ 控制高度
-- 简单颜色检测当作“目标识别”（后面可替换为训练模型）
-- RangeFinder 记录环境深度（scan_log.csv）
-- 每当识别到目标时，用相机 + RangeFinder + GPS + yaw 估算目标坐标
-- 去重后输出 targets.csv（目标坐标表）
-"""
 
 from controller import Robot, Keyboard
 import csv
@@ -112,9 +103,9 @@ LOWER_HSV2 = np.array([170, 120, 70])
 UPPER_HSV2 = np.array([180, 255, 255])
 MIN_CONTOUR_AREA = 200
 
-# ---------- 目标坐标记录 ----------
-targets = []          # 每个元素: {"x":..,"y":..,"z":..,"class":"target"}
-TARGET_MIN_SEP = 0.7  # 距离小于这个就认为是同一个目标（去重）
+
+targets = []          
+TARGET_MIN_SEP = 0.7 
 
 
 def add_target_if_new(x_obj, y_obj, z_obj, label="target"):
@@ -183,7 +174,7 @@ try:
                     target_cy = cy_pix
                     target_found = True
 
-        # ---------- keyboard（保持你原来的 WASD+QE+↑↓） ----------
+        # ---------- keyboard（WASD+QE+↑↓） ----------
         roll_disturb = 0.0
         pitch_disturb = 0.0
         yaw_disturb = 0.0
@@ -207,7 +198,7 @@ try:
             elif key in (ord("Q"), ord("q")):
                 roll_disturb = 1.0
 
-            # ↑ / ↓ 控制高度（步长 0.05，和 C 版接近）
+           
             elif key == Keyboard.UP:
                 target_altitude += 0.05
                 print("Altitude >", target_altitude)
@@ -217,22 +208,20 @@ try:
 
             key = keyboard.getKey()
 
-        # ---------- auto tracking (yaw only, 简单版本) ----------
+       
         if auto_track and target_found and target_cx is not None:
             offset_x = (target_cx - cam_width / 2) / (cam_width / 2)
             yaw_disturb += -1.0 * offset_x
 
-        # ---------- 控制核心：完全对应 C 版 ----------
-        # roll / pitch / yaw 输入
+        # roll / pitch / yaw 
         roll_input = k_roll_p * clamp(roll, -1.0, 1.0) + roll_vel + roll_disturb
         pitch_input = k_pitch_p * clamp(pitch, -1.0, 1.0) + pitch_vel + pitch_disturb
         yaw_input = yaw_disturb
 
-        # 垂直输入：先把高度误差限制在 [-1,1]，再立方，然后乘 k_vertical_p
+        
         clamped_diff_alt = clamp(target_altitude - z + k_vertical_offset, -1.0, 1.0)
         vertical_input = k_vertical_p * (clamped_diff_alt ** 3)
-
-        # 电机输入（完全照抄 C 版）
+        
         fl = k_vertical_thrust + vertical_input - roll_input + pitch_input - yaw_input
         fr = k_vertical_thrust + vertical_input + roll_input + pitch_input + yaw_input
         rl = k_vertical_thrust + vertical_input - roll_input - pitch_input + yaw_input
@@ -251,15 +240,14 @@ try:
                 for k_idx in range(rf_width):
                     r_val = rf_image[k_idx]
                     writer.writerow([t, x, y, z, yaw, k_idx, r_val])
-            # 正前方距离（用于估算目标坐标）
             if rf_width > 0:
                 d_front = rf_image[rf_width // 2]
 
-        # ---------- 估计目标坐标并记录 ----------
+
         if target_found and target_cx is not None and d_front is not None and d_front < 1e6:
             norm_x = (target_cx - cam_width / 2) / (cam_width / 2)  # -1 ~ 1
-            angle_offset = norm_x * (cam_fov / 2.0)                 # 相对于机头的偏航角
-            bearing = yaw + angle_offset                            # 世界坐标系里的方位角
+            angle_offset = norm_x * (cam_fov / 2.0)                
+            bearing = yaw + angle_offset                          
 
             x_obj = x + d_front * math.cos(bearing)
             y_obj = y + d_front * math.sin(bearing)
@@ -270,7 +258,8 @@ try:
 except Exception as e:
     print("[ERROR]", e)
 finally:
-    # 输出目标表
+    
+    
     if targets:
         print("\n=== TARGET LIST ===")
         print("idx\tclass\tx\ty\tz")
